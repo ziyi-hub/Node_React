@@ -3,12 +3,11 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 
 const authenticateJWT = (req, res, next) => {
-    const authHeader = req.headers["authorization"];
+    const authHeader = req.headers["authorization"]; //recup authorization dans la request (headers=>variable=>authorization)
     if (authHeader) {
 
         jwt.verify(authHeader, 'my_secret_key', (err, user) => {
-            if(err)
-            {
+            if (err) {
                 res.status(403).json({
                     error: "Not Authorized",
                 });

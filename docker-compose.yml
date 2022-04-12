@@ -2,19 +2,19 @@ services:
   authentification:
     container_name: authentification
     image: node:lts
-    env_file: authentification/.env
+    env_file: authentification/.env #+ sécurisé dans .env
     working_dir: /usr/src/app
     volumes:
       - ./authentification/api:/usr/src/app
     #command: bash -c "npm i && npm start"
-    command: npm run watch
+    command: npm run watch #affiche tout dans le terminal détaillé
     depends_on:
+      #connecter la meme database
       - commandes_db
     links:
       - commandes_db
     networks:
       - lbs
-
 
   commandes:
     container_name: commandes
@@ -33,7 +33,6 @@ services:
       - commandes_db
     networks:
       - lbs
-
 
   api_gateway_back:
     container_name: api_gateway_back
@@ -55,7 +54,6 @@ services:
     networks:
       - lbs
 
-
   lbs_adminer:
     container_name: lbs_adminer
     image: adminer
@@ -66,17 +64,15 @@ services:
     networks:
       - lbs
 
-
   commandes_db:
     container_name: commandes_db
     image: mariadb:latest
-    env_file: commandes_db/.env
+    env_file: commandes_db/.env #connexion
     volumes:
       - ./commandes_db/db:/var/lib/mysql
       - ./commandes_db/kwkespobdd.sql:/docker-entrypoint-initdb.d/3.sql
     networks:
       - lbs
-
 
 networks:
   lbs:
