@@ -12,13 +12,14 @@ router.post('/signin', async (req, res) => {
     try{
         if(req.headers.authorization)
         {
-            const base64Credentials = req.headers.authorization.split(' ')[1];
-            const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
-            [nom, passwd] = credentials.split(':');
 
-            users = await db.select('nom_client', 'passwd').from('client');
+            let nom = req.headers.pseudo;
+            let password = req.headers.password;
+
+
+            users = await db.select('pseudo', 'password').from('user');
            
-            user = users.find(u => u.nom_client === nom && u.passwd == passwd);
+            user = users.find(u => u.pseudo === nom && u.password == password);
 
             if(!user)
             {
@@ -50,33 +51,28 @@ router.post('/signin', async (req, res) => {
 });
 
 router.post('/signup', async (req, res) => {
-    let user;
+
+    let nom = req.body.pseudo
 
     try{
-        if(req.headers.authorization)
-        {
-            const base64Credentials = req.headers.authorization.split(' ')[1];
-            const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
-            [nom, passwd] = credentials.split(':');
 
-            user = await db("client").insert({
-                nom_client: req.headers.nom,
-                mail_client: req.headers.mail,
-                passwd: req.headers.passwd
-            });
-         
-            token = jwt.sign({nom}, 'my_secret_key', {algorithm: 'HS256', expiresIn: '600s'});
-    
-            return res.status(201).json({
-                user: req.headers.nom,
-                token: token
-            });
-        }
-        else{
-            return res.status(401).json({
-                error: "Missing credential"
-            })
-        }
+        let user = await db("user").insert({
+            pseudo: req.headers.pseudo,
+            email: req.headers.email,
+            password: req.headers.password,
+            event: -1,
+            claw: -1,
+            king: -1,
+            exchange: -1,
+            rewardLevel: ""
+        });
+
+        token = jwt.sign({nom}, 'my_secret_key', {algorithm: 'HS256', expiresIn: '600s'});
+
+        return res.status(201).json({
+            user: req.headers.nom,
+            token: token
+        });
     }
     catch(error){
         res.status(500).json({

@@ -73,8 +73,7 @@ services:
     env_file: commandes_db/.env
     volumes:
       - ./commandes_db/db:/var/lib/mysql
-      - ./commandes_db/schema.sql:/docker-entrypoint-initdb.d/1.sql
-      - ./commandes_db/data.sql:/docker-entrypoint-initdb.d/2.sql
+      - ./commandes_db/kwkespobdd.sql:/docker-entrypoint-initdb.d/3.sql
     networks:
       - lbs
 

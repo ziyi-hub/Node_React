@@ -37,7 +37,9 @@ router.post('/auth/signin', async (req, res, next) => {
            .post('http://authentification:3000/auth/signin',  {},
                {
                    headers: {
-                        'Authorization': `${auth}`,
+                       'Authorization': `${auth}`,
+                       'pseudo' : req.body.pseudo,
+                       'password' : req.body.password,
                    }
                });
 
@@ -52,6 +54,10 @@ router.post('/auth/signin', async (req, res, next) => {
 
 });
 
+
+/**
+ * S'inscrire
+ */
 router.post('/auth/signup', async (req, res, next) => {
     
     const auth = req.headers['authorization'];
@@ -62,9 +68,14 @@ router.post('/auth/signup', async (req, res, next) => {
             {
                 headers: {
                     'Authorization': `${auth}`,
-                    'nom' : req.body.nom_client,
-                    'passwd' : req.body.passwd,
-                    'mail' : req.body.mail_client
+                    'pseudo' : req.body.pseudo,
+                    'email' : req.body.email,
+                    'password' : req.body.password,
+                    'event': req.body.event,
+                    'claw': req.body.claw,
+                    'king': req.body.king,
+                    'exchange': req.body.exchange,
+                    'rewardLevel': req.body.rewardLevel,
                 },
             });
             

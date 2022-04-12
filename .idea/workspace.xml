@@ -20,8 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80a05835-f4ba-4966-b423-c75dcf0e363f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/commandes_db/kwkespobdd.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api_gateway_back/api/middleware/authentification.js" beforeDir="false" afterPath="$PROJECT_DIR$/api_gateway_back/api/middleware/authentification.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api_gateway_back/api/routes/api_gateway.js" beforeDir="false" afterPath="$PROJECT_DIR$/api_gateway_back/api/routes/api_gateway.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentification/api/routes/authentification.js" beforeDir="false" afterPath="$PROJECT_DIR$/authentification/api/routes/authentification.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commandes_db/data.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/commandes_db/schema.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +60,11 @@
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/commandes_db" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -68,7 +79,9 @@
       <workItem from="1649706027974" duration="798000" />
       <workItem from="1649708569916" duration="1952000" />
       <workItem from="1649711651940" duration="3000" />
-      <workItem from="1649711708266" duration="686000" />
+      <workItem from="1649711708266" duration="773000" />
+      <workItem from="1649713209558" duration="27000" />
+      <workItem from="1649746700904" duration="10424000" />
     </task>
     <servers />
   </component>
