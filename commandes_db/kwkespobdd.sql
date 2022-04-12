@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : kwkespobdd.mysql.db
--- Généré le : mar. 12 avr. 2022 à 10:09
+-- Généré le : mar. 12 avr. 2022 à 14:34
 -- Version du serveur : 5.6.50-log
 -- Version de PHP : 7.4.25
 
@@ -1894,11 +1894,11 @@ INSERT INTO `user` (`u_id`, `pseudo`, `email`, `password`, `date`, `parrain`, `l
 (108, 'Suny', 'kwkesport1@gmail.com', '$2y$12$IbjzvSiTVdmkflii8RQnLOTMgSSw.O2yIb3JioLLt5Art9bKvhNXq', '2022-02-28 21:12:35', 'Pamplemousse', 1, 0, 1500, 0, 1, 1, 0, NULL, NULL, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":false,\"level6\":false,\"level7\":false,\"level8\":false,\"level9\":false}', ''),
 (109, 'Sunyy', 'kwkesport@hotmail.com', '$2y$12$m4RuTVVwlnECmgwFA0xy5O7EhP2iToB8T96y1I3kZDlJ/qwU9fUoS', '2022-02-28 21:16:52', 'Antho', 1, 0, 1500, 0, 1, 1, 0, NULL, NULL, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":false,\"level6\":false,\"level7\":false,\"level8\":false,\"level9\":false}', ''),
 (110, 'Â°LoicÂ°', 'Loic23@gmail.com', '$2y$12$PffpODYiAJzliWf9yvHMhuSJiuRhaUkHZIhy28prR0LlPiX9r8udC', '2022-03-02 22:51:40', NULL, 1, 40, 80, 0, 0, 0, 0, NULL, 0, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":false,\"level6\":false,\"level7\":false,\"level8\":false,\"level9\":false}', ''),
-(111, 'Sephix', 'Sephix@gmail.com', '$2y$12$F04zqog8LecjDbnWoVWQy.58MgS4yAZDxyEB.zbayIU/p1JPOw9Zu', '2022-03-02 22:58:57', 'pamplemousse', 7, 30720, 1350, 0, 0, 0, 0, NULL, 329, '{\"level1\":true,\"level2\":true,\"level3\":true,\"level4\":true,\"level5\":true,\"level6\":true,\"level7\":true,\"level8\":false,\"level9\":false}', '{\"bench3_json\":[\"1096\",\"1074\",\"995\"],\"bench2_json\":[\"989\",\"990\"],\"bench_json\":[\"1101\",\"1478\"]}'),
+(111, 'Sephix', 'Sephix@gmail.com', '$2y$12$F04zqog8LecjDbnWoVWQy.58MgS4yAZDxyEB.zbayIU/p1JPOw9Zu', '2022-03-02 22:58:57', 'pamplemousse', 7, 32150, 3940, 0, 0, 0, 0, NULL, 352, '{\"level1\":true,\"level2\":true,\"level3\":true,\"level4\":true,\"level5\":true,\"level6\":true,\"level7\":true,\"level8\":false,\"level9\":false}', '{\"bench3_json\":[\"1096\",\"1101\"],\"bench2_json\":[\"1074\"],\"bench_json\":[\"1095\",\"977\"]}'),
 (112, 'Matteofar92', 'matteo.far@orange.fr', '$2y$12$ypn4VGh78VTFs/gcq0jxuO78gMmJRinrjbOWzaJF59dbPmJ3bLec6', '2022-03-03 18:32:57', NULL, 1, 0, 0, 0, 0, 0, 0, NULL, NULL, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":false,\"level6\":false,\"level7\":false,\"level8\":false,\"level9\":false}', ''),
 (113, 'Kayzon', 'kayzon@gmail.com', '$2y$12$9E8R2FpPwnTIBkOFE.ie6Oz/2xgNWrrM/H4Hjn/v6Kj46uOvtSNUS', '2022-03-07 19:30:27', 'Sephix', 2, 1340, 3890, 0, 0, 0, 0, NULL, 21, '{\"level1\":true,\"level2\":true,\"level3\":false,\"level4\":false,\"level5\":false,\"level6\":false,\"level7\":false,\"level8\":false,\"level9\":false}', ''),
 (116, 'Flo', 'leaderflocaz@outlook.fr', '$2y$12$Ii9hoXohyA6FtCR3/tU80.MvG16tV5udKMCv4zgHAsYpHUsbDiij.', '2022-03-14 14:35:26', NULL, 1, 0, 0, 0, 0, 0, 0, NULL, NULL, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":false,\"level6\":false,\"level7\":false,\"level8\":false,\"level9\":false}', NULL),
-(122, 'FloTest', 'test@hotmail.fr', 'Test123$', '2022-04-01 16:23:48', NULL, 5, 25000, 50000, 0, 0, 0, 0, NULL, NULL, '', NULL),
+(122, 'FloTest', 'test@hotmail.fr', 'Test123$', '2022-04-01 16:23:48', NULL, 1, 500, 50000, 0, 0, 0, 0, NULL, NULL, '', NULL),
 (121, 'fayssalhack', 'hq9pbkb2f@1337.cloudns.nz', '$2y$12$5ssISvPIbFGvQoznX1FVt.bRQOnTXpwL8eAKQx7u2aWaCkSo54RUC', '2022-03-29 11:18:56', NULL, 1, 0, 0, 0, 0, 0, 0, NULL, 0, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":false,\"level6\":false,\"level7\":false,\"level8\":false,\"level9\":false}', NULL),
 (115, 'Kiki95tkt', 'mizelezolakylian@gmail.com', '$2y$12$iTBLJLEDoDP35LYFjmD8oefWl0m1EYrqJPJZwj1ffvb9Q3LhAOR8u', '2022-03-14 09:12:47', NULL, 1, 210, 410, 0, 0, 0, 0, NULL, 1, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":false,\"level6\":false,\"level7\":false,\"level8\":false,\"level9\":false}', ''),
 (117, 'kyky', 'k@k', '$2y$12$lZR8RaLboxuoyv3JPXbcKe.jR0gbPIlGQy2QZazzFVd./rxzFWkU.', '2022-03-16 10:41:41', NULL, 5, 10070, 29150, 0, 0, 0, 0, NULL, 1, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":true,\"level6\":false,\"level7\":false,\"level8\":false,\"level9\":false}', '{\"bench3_json\":[\"1117\",\"1126\",\"1112\",\"1116\"],\"bench2_json\":[\"1123\",\"1122\",\"1111\"],\"bench_json\":[\"1127\",\"1119\"]}'),
@@ -1932,7 +1932,8 @@ ALTER TABLE `ukards`
 -- Index pour la table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`u_id`);
+  ADD PRIMARY KEY (`u_id`),
+  ADD UNIQUE KEY `pseudo` (`pseudo`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
