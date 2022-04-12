@@ -17,7 +17,7 @@ app.use(hateoasLinker);
 
 
 app.use('/', indexRouter);
-app.use('/commandes', commandesRouter);
+app.use('/users', commandesRouter);
 
 app.get('/favicon.ico', (req, res) => res.status(204));
 

@@ -5,15 +5,15 @@ const axios = require('axios');
 
 
 
-router.get('/suivi/commandes', auth, async (req, res, next) => { //async => await axios obligé
+router.get('/users', auth, async (req, res, next) => { //async => await axios obligé
     res.json("ok");
-
-    /*
+/*
     try{
         const result = await axios
-            .get('http://localhost:3335/commandes',
+            .get('http://localhost:3335/users',
             {
                 headers: {
+                    'Authorization': `${auth}`,
                     //data: JSON.stringify(data)
                 }
             });
@@ -23,7 +23,7 @@ router.get('/suivi/commandes', auth, async (req, res, next) => { //async => awai
     catch(error){
         next(error);
     }
-     */
+*/
 });
 //await return tout en meme temps (then?catch?..)
 
