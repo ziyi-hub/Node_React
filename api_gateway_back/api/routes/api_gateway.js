@@ -141,7 +141,7 @@ router.put('/user/:id', auth, async (req, res, next) => {
 
     const accessToken = req.headers["authorization"]; //recup access token dans le header
     const tokenData = jwt.decode(accessToken); // décode le token
-    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', 130); //prend le pseudo de l'utilisateur de l'id de la requête
+    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', req.params.id); //prend le pseudo de l'utilisateur de l'id de la requête
     try {
         if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
             try { //rajouter des if verif si pseudo existe pas deja...
@@ -150,7 +150,7 @@ router.put('/user/:id', auth, async (req, res, next) => {
                     let nbrPseudo = db.select('*').from('user').where('pseudo', req.body.pseudo);
                     nbrPseudo = nbrPseudo.length;
                     if (nbrPseudo >= 1) { //verifie si le pseudo existe deja dans la bdd (unique)
-                        res.json("Ce pseudo existe deja!");
+                        res.json({ error: "Ce pseudo existe deja!" });
                     }
                     else {
 
@@ -187,7 +187,9 @@ router.put('/user/:id', auth, async (req, res, next) => {
             };
         }
         else {
-            res.status(403).json("Access token invalide!");
+            res.status(403).json({
+                error:"Access token invalide!"}
+            );
         }
     }
     catch (error) {
