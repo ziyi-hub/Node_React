@@ -59,7 +59,7 @@ router.post('/signup', async (req, res) => {
         let user = await db("user").insert({
             pseudo: req.headers.pseudo,
             email: req.headers.email,
-            password: await bcrypt.hash(req.headers.password, 10),
+            password: await bcrypt.hash(req.headers.password, 12),
             event: 0,
             claw: 0,
             king: 0,
