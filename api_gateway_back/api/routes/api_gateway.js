@@ -134,6 +134,8 @@ router.post('/auth/signin', async (req, res, next) => {
 
 });
 
+
+
 //modifier les informations d'un utilisateur (pseudo,email,mot de passe)
 router.put('/user/:id', auth, async (req, res, next) => {
     //les parametres passent dans le body
@@ -147,12 +149,16 @@ router.put('/user/:id', auth, async (req, res, next) => {
             try { //rajouter des if verif si pseudo existe pas deja...
                 if (req.body.pseudo) {
 
-                    let nbrPseudo = db.select('*').from('user').where('pseudo', req.body.pseudo);
-                    nbrPseudo = nbrPseudo.length;
-                    if (nbrPseudo >= 1) { //verifie si le pseudo existe deja dans la bdd (unique)
-                        res.json({ error: "Ce pseudo existe deja!" });
+                    //permet de check si un pseudo existe déjà dans la base de données
+                    const bool = await db.select('pseudo').from('user').where('pseudo', req.body.pseudo);
+                    if (bool[0] != null) { //si le pseudo est trouvé et donc existe alors true sinon false
+                        res.status(403).json({
+                            error: "Ce pseudo existe déjà!"
+                        });
                     }
                     else {
+
+
                         await db
                             .select('id')
                             .from('user').where('u_id', '=', req.params.id)
@@ -161,6 +167,23 @@ router.put('/user/:id', auth, async (req, res, next) => {
                             });
                         res.status(204).json('success');
                     }
+                }
+                if (req.body.email) {
+                    await db
+                        .select('id')
+                        .from('user').where('u_id', '=', req.params.id)
+                        .update({
+                            email: req.body.email,
+                        });
+                    res.status(204).json('success');
+                } if (req.body.password) {
+                    await db
+                        .select('id')
+                        .from('user').where('u_id', '=', req.params.id)
+                        .update({
+                            password: await bcrypt.hash(req.body.password, 12), //crypter le nouveau mot de passe
+                        });
+                    res.status(204).json('success');
                 }
             }
             catch (error) {
