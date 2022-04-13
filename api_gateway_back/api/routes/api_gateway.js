@@ -3,6 +3,7 @@ const router = express.Router();
 const auth = require('../middleware/authentification');
 const axios = require('axios');
 const db = require('../knex.js');
+const bcrypt = require('bcryptjs');
 
 
 //Récupérer la liste des users
@@ -128,6 +129,41 @@ router.post('/auth/signin', async (req, res, next) => {
         next(error); //utiliser au lieu de then/catch..
     }
 
+});
+
+
+router.put('/user/:id', async (req, res, next) => {
+
+    try{
+        if(req.headers.pseudo){
+            await db
+                .select('id')
+                .from('user').where('id', '=', req.params.id)
+                .update({
+                    pseudo: req.headers.pseudo,
+                });
+            res.status(204).json('success');
+        }else if(req.headers.email){
+            await db
+                .select('id')
+                .from('user').where('id', '=', req.params.id)
+                .update({
+                    email: req.headers.email,
+                });
+            res.status(204).json('success');
+        }else if(req.headers.password){
+            await db
+                .select('id')
+                .from('user').where('id', '=', req.params.id)
+                .update({
+                    password: await bcrypt.hash(req.headers.password, 12),
+                });
+            res.status(204).json('success');
+        }
+    }
+    catch(error){
+        next(error);
+    };
 });
 
 
