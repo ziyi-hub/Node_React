@@ -142,6 +142,7 @@ router.put('/user/:id', auth, async (req, res, next) => {
     const accessToken = req.headers["authorization"]; //recup access token dans le header
     const tokenData = jwt.decode(accessToken); // décode le token
     const userPseudoParam = await db.select('pseudo').from('user').where('u_id', 130); //prend le pseudo de l'utilisateur de l'id de la requête
+
     try {
         if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
             try { //rajouter des if verif si pseudo existe pas deja...
@@ -164,30 +165,10 @@ router.put('/user/:id', auth, async (req, res, next) => {
                         res.status(204).json('success');
                     }
                 }
-                if (req.body.email) {
-                    await db
-                        .select('id')
-                        .from('user').where('u_id', '=', req.params.id)
-                        .update({
-                            email: req.body.email,
-                        });
-                    res.status(204).json('success');
-                } if (req.body.password) {
-                    await db
-                        .select('id')
-                        .from('user').where('u_id', '=', req.params.id)
-                        .update({
-                            password: await bcrypt.hash(req.body.password, 12), //crypter le nouveau mot de passe
-                        });
-                    res.status(204).json('success');
-                }
             }
             catch (error) {
                 next(error);
             };
-        }
-        else {
-            res.status(403).json("Access token invalide!");
         }
     }
     catch (error) {
