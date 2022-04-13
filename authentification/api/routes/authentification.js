@@ -5,6 +5,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+//authentification, création du jwt token
 router.post('/signin', async (req, res) => {
     let users;
     let user;
@@ -12,17 +13,17 @@ router.post('/signin', async (req, res) => {
     try {
         if (req.headers.authorization) {
 
-            let nom = req.headers.pseudo;
+            let pseudo = req.headers.pseudo;
             let password = req.headers.password;
 
 
             users = await db.select('pseudo', 'password').from('user');
 
-            user = users.find(u => u.pseudo === nom);
+            user = users.find(u => u.pseudo === pseudo);
 
             bcrypt.compare(password, user.password, async function (err, result) {
                 if (result) {
-                    token = jwt.sign({ nom }, 'my_secret_key', { algorithm: 'HS256', expiresIn: '600000s' });
+                    token = jwt.sign({ pseudo }, 'my_secret_key', { algorithm: 'HS256', expiresIn: '600000s' });
 
                     return res.status(201).json({
                         token: token

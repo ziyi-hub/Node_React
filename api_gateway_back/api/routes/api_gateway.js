@@ -4,6 +4,8 @@ const auth = require('../middleware/authentification');
 const axios = require('axios');
 const db = require('../knex.js');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
 
 
 //Récupérer la liste des users
@@ -86,7 +88,7 @@ router.get('/cards', auth, async (req, res, next) => {
 });
 
 
-//Récupérer toutes les cartes
+//Récupérer une carte précise
 router.get('/card/:id', auth, async (req, res, next) => {
     let card;
     let result;
@@ -105,6 +107,7 @@ router.get('/card/:id', auth, async (req, res, next) => {
     };
 });
 
+//se connecter
 router.post('/auth/signin', async (req, res, next) => {
 
     const auth = req.headers['authorization'];
@@ -131,37 +134,63 @@ router.post('/auth/signin', async (req, res, next) => {
 
 });
 
+//modifier les informations d'un utilisateur (pseudo,email,mot de passe)
+router.put('/user/:id', auth, async (req, res, next) => {
+    //les parametres passent dans le body
+    //Récupérer le pseudo de l'access token, si le pseudo == req.params.pseudo alors faire tout ca, sinon erreur
 
-router.put('/user/:id', async (req, res, next) => {
+    const accessToken = req.headers["authorization"]; //recup access token dans le header
+    const tokenData = jwt.decode(accessToken); // décode le token
+    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', 130); //prend le pseudo de l'utilisateur de l'id de la requête
+    try {
+        if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
+            try { //rajouter des if verif si pseudo existe pas deja...
+                if (req.body.pseudo) {
 
-    try{
-        if(req.headers.pseudo){
-            await db
-                .select('id')
-                .from('user').where('id', '=', req.params.id)
-                .update({
-                    pseudo: req.headers.pseudo,
-                });
-            res.status(204).json('success');
-        }else if(req.headers.email){
-            await db
-                .select('id')
-                .from('user').where('id', '=', req.params.id)
-                .update({
-                    email: req.headers.email,
-                });
-            res.status(204).json('success');
-        }else if(req.headers.password){
-            await db
-                .select('id')
-                .from('user').where('id', '=', req.params.id)
-                .update({
-                    password: await bcrypt.hash(req.headers.password, 12),
-                });
-            res.status(204).json('success');
+                    let nbrPseudo = db.select('*').from('user').where('pseudo', req.body.pseudo);
+                    nbrPseudo = nbrPseudo.length;
+                    if (nbrPseudo >= 1) { //verifie si le pseudo existe deja dans la bdd (unique)
+                        res.json("Ce pseudo existe deja!");
+                    }
+                    else {
+
+
+                        await db
+                            .select('id')
+                            .from('user').where('u_id', '=', req.params.id)
+                            .update({
+                                pseudo: req.body.pseudo,
+                            });
+                        res.status(204).json('success');
+                    }
+                }
+                if (req.body.email) {
+                    await db
+                        .select('id')
+                        .from('user').where('u_id', '=', req.params.id)
+                        .update({
+                            email: req.body.email,
+                        });
+                    res.status(204).json('success');
+                } if (req.body.password) {
+                    await db
+                        .select('id')
+                        .from('user').where('u_id', '=', req.params.id)
+                        .update({
+                            password: await bcrypt.hash(req.body.password, 12), //crypter le nouveau mot de passe
+                        });
+                    res.status(204).json('success');
+                }
+            }
+            catch (error) {
+                next(error);
+            };
+        }
+        else {
+            res.status(403).json("Access token invalide!");
         }
     }
-    catch(error){
+    catch (error) {
         next(error);
     };
 });
