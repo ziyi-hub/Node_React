@@ -16,23 +16,6 @@ services:
     networks:
       - lbs
 
-  commandes:
-    container_name: commandes
-    image: node:lts
-    ports:
-      - 3335:3000
-    env_file: commandes/.env
-    working_dir: /usr/src/app
-    volumes:
-      - ./commandes/api:/usr/src/app
-    #command: bash -c "npm i && npm start"
-    command: npm run watch
-    depends_on:
-      - commandes_db
-    links:
-      - commandes_db
-    networks:
-      - lbs
 
   api_gateway_back:
     container_name: api_gateway_back

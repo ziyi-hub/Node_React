@@ -2,27 +2,42 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/authentification');
 const axios = require('axios');
+const db = require('../knex.js');
 
 
 
-router.get('/users', auth, async (req, res, next) => { //async => await axios obligé
-    //res.json("ok");
-
-    try {
-        const result = await axios
-            .get('http://localhost:3335/users',
+router.get('/user', auth, async (req, res, next) => { //async => await axios obligé
+    /*
+        try{
+            const result = await axios
+                .get('http://localhost:3335/users',
                 {
                     headers: {
-                        //'Authorization': `${auth}`,
-                        //data: JSON.stringify(data)
+    
                     }
                 });
+            
+            res.json(result.data);
+        }
+        catch (error) {
+            next(error);
+        }
+    */
+    let user;
+    let result;
 
-        res.json(result);
+    try {
+        user = await db.select('u_id', 'pseudo', 'level', 'xp').from('user');
+        result = {
+            type: "collection",
+            count: user.length,
+            users: user
+        }
+        res.status(200).json(result);
     }
     catch (error) {
         next(error);
-    }
+    };
 });
 //await return tout en meme temps (then?catch?..)
 

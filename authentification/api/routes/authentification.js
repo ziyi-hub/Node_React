@@ -2,7 +2,7 @@ const db = require('../knex.js');
 const uuid = require('uuid');
 const express = require('express');
 const router = express.Router();
-//const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 router.post('/signin', async (req, res) => {
@@ -19,21 +19,21 @@ router.post('/signin', async (req, res) => {
 
             users = await db.select('pseudo', 'password').from('user');
            
-            user = users.find(u => u.pseudo === nom && u.password == password);
+            user = users.find(u => u.pseudo === nom);
 
-            if(!user)
-            {
-                return res.status(401).json({
-                    error: "Bad credentials"
-                })
-            }
-            else{
-                token = jwt.sign({nom}, 'my_secret_key', {algorithm: 'HS256', expiresIn: '600000s'});
-    
-                return res.status(201).json({
-                    token: token
-                });
-            }
+            bcrypt.compare(password, user.password, async function (err, result) {
+                if (result){
+                    token = jwt.sign({nom}, 'my_secret_key', {algorithm: 'HS256', expiresIn: '600000s'});
+
+                    return res.status(201).json({
+                        token: token
+                    });
+                }else{
+                    return res.status(401).json({
+                        error: "Bad credentials"
+                    })
+                }
+            });
         }
         else{
             return res.status(401).json({
@@ -59,11 +59,11 @@ router.post('/signup', async (req, res) => {
         let user = await db("user").insert({
             pseudo: req.headers.pseudo,
             email: req.headers.email,
-            password: req.headers.password,
-            event: -1,
-            claw: -1,
-            king: -1,
-            exchange: -1,
+            password: await bcrypt.hash(req.headers.password, 10),
+            event: 0,
+            claw: 0,
+            king: 0,
+            exchange: 0,
             rewardLevel: ""
         });
 
