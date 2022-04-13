@@ -5,33 +5,18 @@ const axios = require('axios');
 const db = require('../knex.js');
 
 
+//Récupérer la liste des users
+router.get('/users', auth, async (req, res, next) => { //async => await axios obligé
 
-router.get('/user', auth, async (req, res, next) => { //async => await axios obligé
-    /*
-        try{
-            const result = await axios
-                .get('http://localhost:3335/users',
-                {
-                    headers: {
-    
-                    }
-                });
-            
-            res.json(result.data);
-        }
-        catch (error) {
-            next(error);
-        }
-    */
-    let user;
+    let users;
     let result;
 
     try {
-        user = await db.select('u_id', 'pseudo', 'level', 'xp').from('user');
+        users = await db.select('u_id', 'pseudo', 'level', 'xp').from('user');
         result = {
             type: "collection",
-            count: user.length,
-            users: user
+            count: users.length,
+            users: users
         }
         res.status(200).json(result);
     }
@@ -41,6 +26,83 @@ router.get('/user', auth, async (req, res, next) => { //async => await axios obl
 });
 //await return tout en meme temps (then?catch?..)
 
+
+//Récupérer un seul utilisateur
+router.get('/user/:id', auth, async (req, res, next) => { //:id = parametre, recupérable par req.params
+    let user;
+    let result;
+
+    try {
+        user = await db.select('*').from('user').where('u_id', req.params.id); //par défaut dans where '=', mais tu peux remplacer par '<' ou '>' ...
+        result = {
+            type: "collection",
+            count: user.length,
+            user: user
+        }
+        res.status(200).json(result);
+    }
+    catch (error) {
+        next(error);
+    };
+});
+
+//Récupérer le deck d'un utilisateur
+router.get('/user/:id/deck', auth, async (req, res, next) => {
+    let deck;
+    let result;
+
+    try {
+        deck = await db.select('*').from('ukards').where('UserID', req.params.id);
+        result = {
+            type: "deck",
+            count: deck.length,
+            deck: deck
+        }
+        res.status(200).json(result);
+    }
+    catch (error) {
+        next(error);
+    };
+});
+
+//Récupérer toutes les cartes
+router.get('/cards', auth, async (req, res, next) => {
+    let cards;
+    let result;
+
+    try {
+        cards = await db.select('*').from('kard');
+        result = {
+            type: "collection",
+            count: cards.length,
+            cards: cards
+        }
+        res.status(200).json(result);
+    }
+    catch (error) {
+        next(error);
+    };
+});
+
+
+//Récupérer toutes les cartes
+router.get('/card/:id', auth, async (req, res, next) => {
+    let card;
+    let result;
+
+    try {
+        card = await db.select('*').from('kard').where('id', req.params.id);
+        result = {
+            type: "collection",
+            count: card.length,
+            card: card
+        }
+        res.status(200).json(result);
+    }
+    catch (error) {
+        next(error);
+    };
+});
 
 router.post('/auth/signin', async (req, res, next) => {
 
