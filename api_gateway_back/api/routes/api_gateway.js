@@ -117,7 +117,7 @@ router.put('/user/:id/xp', auth, async (req, res, next) => { //:id = parametre, 
         if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
 
             try {
-                if(req.body.xp > 0){
+                if (req.body.xp > 0) {
                     let userXp = await db.select('xp').from('user').where('u_id', '=', req.params.id);
                     await db
                         .select('xp')
@@ -126,7 +126,7 @@ router.put('/user/:id/xp', auth, async (req, res, next) => { //:id = parametre, 
                             xp: userXp[0].xp + req.body.xp,
                         });
                     res.status(204).json('success');
-                }else{
+                } else {
                     res.status(401).json({
                         error: "xp doit positive"
                     })
@@ -139,8 +139,8 @@ router.put('/user/:id/xp', auth, async (req, res, next) => { //:id = parametre, 
         }
         else {
             res.status(403).json({
-                    error: "Access token invalide, vous n'avez pas les droits!"
-                }
+                error: "Access token invalide, vous n'avez pas les droits!"
+            }
             );
         }
     }
@@ -160,7 +160,7 @@ router.put('/user/:id/koins', auth, async (req, res, next) => { //:id = parametr
         if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
 
             try {
-                if(req.body.koins > 0){
+                if (req.body.koins > 0) {
                     let userKoins = await db.select('koins').from('user').where('u_id', '=', req.params.id);
                     await db
                         .select('koins')
@@ -169,7 +169,7 @@ router.put('/user/:id/koins', auth, async (req, res, next) => { //:id = parametr
                             koins: userKoins[0].koins + req.body.koins,
                         });
                     res.status(204).json('success');
-                }else{
+                } else {
                     res.status(401).json({
                         error: "koins doit positive"
                     })
@@ -181,8 +181,8 @@ router.put('/user/:id/koins', auth, async (req, res, next) => { //:id = parametr
         }
         else {
             res.status(403).json({
-                    error: "Access token invalide, vous n'avez pas les droits!"
-                }
+                error: "Access token invalide, vous n'avez pas les droits!"
+            }
             );
         }
     }
@@ -217,8 +217,8 @@ router.put('/user/:id/level', auth, async (req, res, next) => { //:id = parametr
         }
         else {
             res.status(403).json({
-                    error: "Access token invalide, vous n'avez pas les droits!"
-                }
+                error: "Access token invalide, vous n'avez pas les droits!"
+            }
             );
         }
     }
