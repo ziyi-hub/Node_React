@@ -107,6 +107,124 @@ router.get('/cards', auth, async (req, res, next) => {
 });
 
 
+// Modifier xp
+router.put('/user/:id/xp', auth, async (req, res, next) => { //:id = parametre, recupérable par req.params
+
+    const accessToken = req.headers["authorization"]; //recup access token dans le header
+    const tokenData = jwt.decode(accessToken); // décode le token
+    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', req.params.id); //prend le pseudo de l'utilisateur de l'id de la requête
+    try { //verif que le token est le meme pour éviter que tout le monde récupère les informations des autres
+        if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
+
+            try {
+                if(req.body.xp > 0){
+                    await db
+                        .select('xp')
+                        .from('user').where('u_id', '=', req.params.id)
+                        .update({
+                            xp: req.body.xp,
+                        });
+                    res.status(204).json('success');
+                }else{
+                    res.status(401).json({
+                        error: "xp doit positive"
+                    })
+                }
+
+            }
+            catch (error) {
+                next(error);
+            };
+        }
+        else {
+            res.status(403).json({
+                    error: "Access token invalide, vous n'avez pas les droits!"
+                }
+            );
+        }
+    }
+    catch (error) {
+        next(error);
+    };
+});
+
+
+// Modifier koin
+router.put('/user/:id/koins', auth, async (req, res, next) => { //:id = parametre, recupérable par req.params
+
+    const accessToken = req.headers["authorization"]; //recup access token dans le header
+    const tokenData = jwt.decode(accessToken); // décode le token
+    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', req.params.id); //prend le pseudo de l'utilisateur de l'id de la requête
+    try { //verif que le token est le meme pour éviter que tout le monde récupère les informations des autres
+        if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
+
+            try {
+                if(req.body.koins > 0){
+                    await db
+                        .select('koins')
+                        .from('user').where('u_id', '=', req.params.id)
+                        .update({
+                            koins: req.body.koins,
+                        });
+                    res.status(204).json('success');
+                }else{
+                    res.status(401).json({
+                        error: "koins doit positive"
+                    })
+                }
+            }
+            catch (error) {
+                next(error);
+            };
+        }
+        else {
+            res.status(403).json({
+                    error: "Access token invalide, vous n'avez pas les droits!"
+                }
+            );
+        }
+    }
+    catch (error) {
+        next(error);
+    };
+});
+
+
+// incrémenter un level
+router.put('/user/:id/level', auth, async (req, res, next) => { //:id = parametre, recupérable par req.params
+
+    const accessToken = req.headers["authorization"]; //recup access token dans le header
+    const tokenData = jwt.decode(accessToken); // décode le token
+    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', req.params.id); //prend le pseudo de l'utilisateur de l'id de la requête
+    try { //verif que le token est le meme pour éviter que tout le monde récupère les informations des autres
+        if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
+
+            try {
+                let userLevel = await db.select('level').from('user').where('u_id', '=', req.params.id);
+                await db
+                    .select('level')
+                    .from('user').where('u_id', '=', req.params.id)
+                    .update({
+                        level: userLevel[0].level + 1,
+                    });
+                res.status(204).json('success');
+            }
+            catch (error) {
+                next(error);
+            };
+        }
+        else {
+            res.status(403).json({
+                    error: "Access token invalide, vous n'avez pas les droits!"
+                }
+            );
+        }
+    }
+    catch (error) {
+        next(error);
+    };
+});
+
 
 //incrémenter un pack king
 //incrémenter de 1 et retirer le nbr de credit, verif qu'il a le nombre de crédit

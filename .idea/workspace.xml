@@ -20,14 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80a05835-f4ba-4966-b423-c75dcf0e363f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/commandes_db/kwkespobdd.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api_gateway_back/api/middleware/authentification.js" beforeDir="false" afterPath="$PROJECT_DIR$/api_gateway_back/api/middleware/authentification.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api_gateway_back/api/routes/api_gateway.js" beforeDir="false" afterPath="$PROJECT_DIR$/api_gateway_back/api/routes/api_gateway.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authentification/api/routes/authentification.js" beforeDir="false" afterPath="$PROJECT_DIR$/authentification/api/routes/authentification.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commandes_db/data.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/commandes_db/schema.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +76,19 @@
       <workItem from="1649711708266" duration="773000" />
       <workItem from="1649713209558" duration="27000" />
       <workItem from="1649746700904" duration="10424000" />
+      <workItem from="1649845912731" duration="7227000" />
+      <workItem from="1649919856190" duration="62000" />
+      <workItem from="1649923507124" duration="813000" />
+      <workItem from="1649926800956" duration="3192000" />
     </task>
+    <task id="LOCAL-00001" summary="fix syntaxe erreur">
+      <created>1649856592968</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1649856592968</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -99,6 +105,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix syntaxe erreur" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix syntaxe erreur" />
   </component>
   <component name="WindowStateProjectService">
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1649706248987">
