@@ -107,6 +107,30 @@ router.get('/cards', auth, async (req, res, next) => {
 });
 
 
+
+//incrémenter un pack king
+//incrémenter de 1 et retirer le nbr de credit, verif qu'il a le nombre de crédit
+router.patch('/king/:pseudo', auth, async (req, res, next) => {
+    let parrainUser;
+    let kingParrain;
+
+    try {
+        kingParrain = await db.select("king").from("user").where("pseudo", req.params.pseudo);
+        parrainUser = await db("user").where("pseudo", req.params.pseudo).update({
+            king: kingParrain[0].king + 1
+        });
+        res.json(kingParrain);
+    }
+    catch (error) {
+        next(error);
+    };
+});
+
+
+
+
+
+
 //Récupérer une carte précise
 router.get('/card/:id', auth, async (req, res, next) => {
     let card;
@@ -231,18 +255,40 @@ router.put('/user/:id', auth, async (req, res, next) => {
     };
 });
 
-
 /**
  * S'inscrire
  */
 router.post('/auth/signup', async (req, res, next) => {
 
     const auth = req.headers['authorization'];
+    let result;
 
     try {
 
-        if (req.body.parrain) {
-            const result = await axios
+        if (req.body.parrain) { // si il a rentré un parrain
+            const boolParrain = await db.select("*").from("user").where("pseudo", req.body.parrain); //verifie que le parrain existe
+            if (boolParrain[0] != null) { //si il existe:
+                result = await axios
+                    .post('http://authentification:3000/auth/signup', {},
+                        {
+                            headers: {
+                                'Authorization': `${auth}`,
+                                'pseudo': req.body.pseudo,
+                                'email': req.body.email,
+                                'password': req.body.password,
+                                'parrain': req.body.parrain
+                            },
+                        });
+            }
+            else { //parrain existe pas = erreur faut recommencer
+                result = { error: "Ce parrain n'existe pas!" } //envoie une erreur pour authentification.js
+                res.status(401).json({
+                    error: "Ce parrain n'existe pas!"
+                })
+            }
+        }
+        else { //si pas de parrain
+            result = await axios
                 .post('http://authentification:3000/auth/signup', {},
                     {
                         headers: {
@@ -250,27 +296,13 @@ router.post('/auth/signup', async (req, res, next) => {
                             'pseudo': req.body.pseudo,
                             'email': req.body.email,
                             'password': req.body.password,
-                            'parrain': req.body.parrain
                         },
                     });
         }
-        else {
-            const result = await axios
-                .post('http://authentification:3000/auth/signup', {},
-                    {
-                        headers: {
-                            'Authorization': `${auth}`,
-                            'pseudo': req.body.pseudo,
-                            'email': req.body.email,
-                            'password': req.body.password,
-                        },
-                    });
-        }
-
 
         res.json(result.data);
     }
-    catch (error) {
+    catch (error) { //si erreur lors de l'envois du json
         res.status(401).json({
             error: "Bad credentials"
         })

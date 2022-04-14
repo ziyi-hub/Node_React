@@ -61,7 +61,15 @@ router.post('/signup', async (req, res) => {
                 pseudo: req.headers.pseudo,
                 email: req.headers.email,
                 password: await bcrypt.hash(req.headers.password, 12), //,12 veut dire qu'on effectue 12 fois le cryptage
-                parrain: req.headers.parrain
+                parrain: req.headers.parrain,
+                king: 1
+            });
+            //faire une route ajout carte pour le parrain
+            let kingParrain;
+            let parrainUser;
+            kingParrain = await db.select("king").from("user").where("pseudo", req.headers.parrain); //récupére le nombre de king du parrain
+            parrainUser = await db("user").where("pseudo", req.headers.parrain).update({ //update le king du parrain
+                king: kingParrain[0].king + 1
             });
         }
         else {
