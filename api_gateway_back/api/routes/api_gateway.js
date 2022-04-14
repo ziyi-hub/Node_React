@@ -118,11 +118,12 @@ router.put('/user/:id/xp', auth, async (req, res, next) => { //:id = parametre, 
 
             try {
                 if (req.body.xp > 0) {
+                    let userXp = await db.select('xp').from('user').where('u_id', '=', req.params.id);
                     await db
                         .select('xp')
                         .from('user').where('u_id', '=', req.params.id)
                         .update({
-                            xp: req.body.xp,
+                            xp: userXp[0].xp + req.body.xp,
                         });
                     res.status(204).json('success');
                 } else {
@@ -160,11 +161,12 @@ router.put('/user/:id/koins', auth, async (req, res, next) => { //:id = parametr
 
             try {
                 if (req.body.koins > 0) {
+                    let userKoins = await db.select('koins').from('user').where('u_id', '=', req.params.id);
                     await db
                         .select('koins')
                         .from('user').where('u_id', '=', req.params.id)
                         .update({
-                            koins: req.body.koins,
+                            koins: userKoins[0].koins + req.body.koins,
                         });
                     res.status(204).json('success');
                 } else {
