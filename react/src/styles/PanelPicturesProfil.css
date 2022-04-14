@@ -1,0 +1,151 @@
+.section-change-pictures-profil{
+    display: flex;
+    justify-content: center;
+}
+
+.container-border-change-picture-profil{
+    width: 90%;
+    background-color: #301417;
+    margin-top: 50px;
+    border: 4px solid #fee580;
+    border-radius: 48px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.box-pictures{
+    margin-top: 30px;
+    border-radius: 500px;
+    
+}
+
+.mt-picture-name-user{
+    margin-top: 5%;
+}
+
+.container-images-change-pictures-profil{
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    justify-content: space-around;
+}
+
+.panel-pictures{
+    border: 2px solid #fee580;
+    border-radius: 500px;
+    max-width: 30vw;
+}
+
+.title-change-pictures{
+    color: #fee580;
+    font-family: "Headshot";
+    font-size: 5vw;
+    border-bottom: #fee580 3px solid;
+}
+
+.color-white-title-change-picture{
+    color: white;
+}
+
+.container-pictures{
+    display: flex;
+    margin-top: 5%;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.position-button-change-pictures{
+    margin-top: 30px;
+}
+
+.mt-button-change-pictures{
+    margin: 30px;
+}
+
+.container-position-settings-change-pictures{
+    width: 100%;
+    
+}
+
+
+
+@media screen and (min-width: 1001px) {
+    .title-change-pictures{
+
+        font-size: 2vw;
+
+    }
+
+    .container-border-change-picture-profil{
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-bottom: 10vh;
+    }
+
+    .container-images-change-pictures-profil{
+        display: flex;
+        flex-wrap: wrap;
+        width: 50%;
+        justify-content: space-around;
+        margin-top: 3%;
+    }
+
+    .title-change-pictures{
+
+        font-size: 3.5vw;
+
+    }
+
+    .panel-pictures{
+        min-width: 10vw;
+        max-width: 12vw;
+    }
+
+    .container-position-settings-change-pictures{
+        width: 77.78%;
+        
+    }
+
+   .container-settings-change-pictures{
+       width: 37.2%;
+       text-align: start;
+       margin-top: -53%;
+   }
+
+   .position-button-change-pictures{
+       display: flex;
+       justify-content: space-around;
+       width: 90%;
+   }
+
+   .position-picture-user-change-pictures{
+       margin-top: -40%;
+   }
+}
+
+
+@media screen and (min-width: 1335px) {
+    .position-picture-user-change-pictures{
+        margin-top: -35%;
+    }
+
+    .container-settings-change-pictures{
+        margin-top: -45%;
+    }
+}
+
+@media screen and (min-width: 1458px) {
+    .position-picture-user-change-pictures{
+        margin-top: -15%;
+    }
+
+    .container-settings-change-pictures{
+        margin-top: -23%;
+    }
+}
+
+

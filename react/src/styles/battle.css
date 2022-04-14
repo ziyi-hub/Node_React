@@ -1,0 +1,152 @@
+.container-border-battle {
+    width: 90%;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.container-section-battle {
+    display: flex;
+    justify-content: center;
+}
+
+.container-text-battle-desktop {
+    display: none;
+}
+
+.container-text-battle-mobile {
+    margin: 7% 0;
+    width: 80%;
+}
+
+.text-battle {
+    padding: 20px;
+    font-size: 4vw;
+    color: white;
+    font-family: 'Gotham-Bold';
+}
+
+.text-battle-color {
+    color: #fee580;
+}
+
+.reward-battle {
+    border: #fee580 4px solid;
+    border-radius: 48px;
+    margin: 7% 0;
+    width: 100%;
+    font-family: 'Headshot';
+}
+
+.container-title-battle {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.title-battle {
+    text-transform: uppercase;
+    font-size: 6vw;
+    color: #fee580;
+    border-bottom: #fee580 4px solid;
+    margin: 10px 0;
+    font-family: 'Headshot';
+}
+
+.container-img-battle {
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.battle-mod {
+    font-family: 'Headshot';
+    font-size: 6vw;
+    color: white;
+    margin: 20px 0;
+}
+
+.img-battle {
+    margin-bottom: 30px;
+}
+
+.container-info-battle {
+    border-radius: 48px;
+    border: #fee580 4px solid;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    width: 80%;
+}
+
+@media screen and (min-width:1001px) {
+    .container-section-battle {
+        padding-bottom: 12vh;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .container-border-battle {
+        border: #fee580 4px solid;
+        border-radius: 48px;
+        width: 90%;
+        margin-top: 50px;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+
+    }
+
+    .container-info-battle {
+        border-radius: 48px;
+        border: transparent 4px solid;
+        display: flex;
+        text-align: center;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .container-text-battle-desktop {
+        display: block;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .container-text-battle-mobile {
+        display: none;
+    }
+
+    .text-battle {
+        font-size: 1.5vw;
+    }
+
+    .title-battle {
+        font-size: 2.5vw;
+    }
+
+    .battle-mod {
+
+        font-size: 3vw;
+
+    }
+
+    .img-battle {
+        margin-bottom: 0;
+    }
+
+    .container-img-battle {
+        margin-bottom: 17px;
+    }
+}
+
+@media screen and (min-width:1501px) {
+    .container-section-battle {
+        padding-bottom: 26vh;
+        display: flex;
+        justify-content: space-around;
+    }
+}

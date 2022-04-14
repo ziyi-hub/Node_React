@@ -1,0 +1,71 @@
+@font-face {
+  font-family: 'GothamBold';
+  src: url(../assets/fonts/GothamBold.ttf);
+}
+
+.FooterContainer {
+  padding: 25px 0 10px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+
+.link-footer {
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  color: #fee580;
+}
+
+.link-footer:hover {
+  border-bottom: 3px solid #fee580;
+
+}
+
+.liste {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  color: #fee580;
+  font-size: 1vw;
+  font-family: 'GothamBold';
+  padding: 0;
+
+}
+
+@media screen and (max-width: 730px) {
+  .liste {
+    font-size: 2vw;
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+  .liste {
+    font-size: 2.5vw;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+  .liste {
+    font-size: 3vw;
+  }
+
+}
+
+@media screen and (max-width: 400px) {
+  .liste {
+    font-size: 2.7vw;
+  }
+
+}
+
+@media screen and (max-width: 300px) {
+  .liste {
+    font-size: 2vw;
+  }
+
+}

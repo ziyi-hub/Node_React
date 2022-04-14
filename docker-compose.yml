@@ -16,6 +16,18 @@ services:
     networks:
       - lbs
 
+  react:
+    container_name: react
+    image: node:lts
+    working_dir: /usr/src/app
+    volumes:
+      - ./react:/usr/src/app
+    #command: npm install
+    command: npm start
+    ports:
+      - 3000:3000
+    networks:
+      - lbs
 
   api_gateway_back:
     container_name: api_gateway_back
