@@ -50,22 +50,29 @@ router.post('/signin', async (req, res) => {
     }
 });
 
+//inscription
 router.post('/signup', async (req, res) => {
 
     let nom = req.body.pseudo
 
     try {
+        if (req.headers.parrain) {
+            let user = await db("user").insert({
+                pseudo: req.headers.pseudo,
+                email: req.headers.email,
+                password: await bcrypt.hash(req.headers.password, 12), //,12 veut dire qu'on effectue 12 fois le cryptage
+                parrain: req.headers.parrain
+            });
+        }
+        else {
+            let user = await db("user").insert({
+                pseudo: req.headers.pseudo,
+                email: req.headers.email,
+                password: await bcrypt.hash(req.headers.password, 12), //,12 veut dire qu'on effectue 12 fois le cryptage
+            });
+        }
 
-        let user = await db("user").insert({
-            pseudo: req.headers.pseudo,
-            email: req.headers.email,
-            password: await bcrypt.hash(req.headers.password, 12), //,12 veut dire qu'on effectue 12 fois le cryptage
-            event: 0,
-            claw: 0,
-            king: 0,
-            exchange: 0,
-            rewardLevel: ""
-        });
+
 
         token = jwt.sign({ nom }, 'my_secret_key', { algorithm: 'HS256', expiresIn: '600s' });
 

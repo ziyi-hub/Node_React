@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : kwkespobdd.mysql.db
--- Généré le : mar. 12 avr. 2022 à 14:34
+-- Généré le : jeu. 14 avr. 2022 à 10:43
 -- Version du serveur : 5.6.50-log
 -- Version de PHP : 7.4.25
 
@@ -32,6 +32,19 @@ CREATE TABLE `friends` (
   `pseudo` varchar(100) NOT NULL,
   `xp` int(11) NOT NULL,
   `lvl` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `infirmary`
+--
+
+CREATE TABLE `infirmary` (
+  `id` int(11) NOT NULL,
+  `id_carte` int(11) DEFAULT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  `nbrTour` int(11) NOT NULL DEFAULT '3'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1576,6 +1589,7 @@ INSERT INTO `ukards` (`rowID`, `UserID`, `KardID`) VALUES
 (1063, 113, 127),
 (1441, 119, 470),
 (1440, 119, 348),
+(1543, 117, 60),
 (1438, 119, 91),
 (1437, 119, 35),
 (1500, 123, 194),
@@ -1588,11 +1602,11 @@ INSERT INTO `ukards` (`rowID`, `UserID`, `KardID`) VALUES
 (1088, 116, 160),
 (1089, 116, 11),
 (1453, 117, 537),
-(1112, 117, 126),
+(1553, 117, 156),
 (1093, 111, 156),
 (1299, 104, 104),
 (1095, 111, 562),
-(1111, 117, 183),
+(1552, 117, 521),
 (1117, 117, 136),
 (1326, 24, 301),
 (1119, 117, 154),
@@ -1633,6 +1647,7 @@ INSERT INTO `ukards` (`rowID`, `UserID`, `KardID`) VALUES
 (1432, 119, 24),
 (1435, 119, 368),
 (1475, 120, 312),
+(1535, 104, 558),
 (1325, 24, 47),
 (1324, 24, 134),
 (1449, 104, 155),
@@ -1647,6 +1662,7 @@ INSERT INTO `ukards` (`rowID`, `UserID`, `KardID`) VALUES
 (1252, 119, 119),
 (1253, 119, 338),
 (1254, 119, 373),
+(1537, 104, 21),
 (1256, 119, 29),
 (1257, 119, 149),
 (1478, 111, 136),
@@ -1655,6 +1671,7 @@ INSERT INTO `ukards` (`rowID`, `UserID`, `KardID`) VALUES
 (1261, 119, 145),
 (1262, 119, 187),
 (1263, 119, 295),
+(1538, 104, 50),
 (1265, 119, 299),
 (1266, 119, 518),
 (1267, 104, 84),
@@ -1669,7 +1686,8 @@ INSERT INTO `ukards` (`rowID`, `UserID`, `KardID`) VALUES
 (1276, 119, 129),
 (1277, 119, 172),
 (1278, 119, 60),
-(1461, 117, 103),
+(1540, 104, 73),
+(1555, 117, 91),
 (1281, 119, 480),
 (1282, 119, 97),
 (1283, 119, 124),
@@ -1687,7 +1705,7 @@ INSERT INTO `ukards` (`rowID`, `UserID`, `KardID`) VALUES
 (1329, 104, 106),
 (1328, 24, 406),
 (1454, 117, 70),
-(1308, 117, 525),
+(1554, 117, 148),
 (1309, 117, 174),
 (1311, 117, 46),
 (1472, 120, 89),
@@ -1695,7 +1713,7 @@ INSERT INTO `ukards` (`rowID`, `UserID`, `KardID`) VALUES
 (1314, 119, 85),
 (1315, 119, 279),
 (1316, 119, 429),
-(1462, 117, 140),
+(1551, 117, 178),
 (1318, 117, 515),
 (1495, 119, 109),
 (1494, 119, 146),
@@ -1707,10 +1725,15 @@ INSERT INTO `ukards` (`rowID`, `UserID`, `KardID`) VALUES
 (1341, 119, 497),
 (1342, 119, 485),
 (1460, 117, 537),
+(1547, 117, 111),
+(1546, 117, 515),
+(1545, 117, 154),
+(1556, 117, 82),
 (1533, 123, 121),
 (1532, 123, 130),
 (1350, 119, 57),
 (1351, 119, 180),
+(1536, 104, 513),
 (1353, 119, 359),
 (1354, 119, 323),
 (1355, 119, 89),
@@ -1721,6 +1744,7 @@ INSERT INTO `ukards` (`rowID`, `UserID`, `KardID`) VALUES
 (1360, 119, 152),
 (1361, 119, 106),
 (1362, 119, 462),
+(1541, 117, 501),
 (1364, 119, 385),
 (1531, 123, 138),
 (1530, 123, 154),
@@ -1751,6 +1775,7 @@ INSERT INTO `ukards` (`rowID`, `UserID`, `KardID`) VALUES
 (1391, 119, 98),
 (1392, 119, 438),
 (1393, 119, 305),
+(1539, 104, 97),
 (1395, 119, 120),
 (1396, 119, 57),
 (1397, 119, 242),
@@ -1803,14 +1828,14 @@ CREATE TABLE `user` (
   `parrain` varchar(60) DEFAULT NULL,
   `level` int(10) DEFAULT '0',
   `xp` int(50) DEFAULT '0',
-  `koins` int(30) DEFAULT NULL,
-  `event` int(10) NOT NULL,
-  `claw` int(10) NOT NULL,
-  `king` int(10) NOT NULL,
-  `exchange` int(10) NOT NULL,
+  `koins` int(30) DEFAULT '0',
+  `event` int(10) NOT NULL DEFAULT '0',
+  `claw` int(10) NOT NULL DEFAULT '1',
+  `king` int(10) NOT NULL DEFAULT '0',
+  `exchange` int(10) NOT NULL DEFAULT '0',
   `logoutWin` int(4) DEFAULT NULL,
   `winsVsIA` int(4) DEFAULT NULL,
-  `rewardLevel` longtext NOT NULL,
+  `rewardLevel` longtext,
   `infirmary` longtext
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -1887,7 +1912,7 @@ INSERT INTO `user` (`u_id`, `pseudo`, `email`, `password`, `date`, `parrain`, `l
 (123, 'tangente', 'r@r', '$2y$12$VE10hYnu1JVdrl3z.fEVhuExkkPj8mX/i7b73qVAe0uQNm3cwFtgK', '2022-04-02 11:26:58', 'Waks', 7, 30030, 1560, 0, 1, 4, 0, NULL, 0, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":false,\"level6\":false,\"level7\":true,\"level8\":false,\"level9\":false}', '{\"bench3_json\":[\"1522\",\"1530\",\"1533\",\"1509\",\"1528\"],\"bench2_json\":[\"1524\",\"1508\",\"1529\",\"1532\"],\"bench_json\":[\"1514\",\"1504\",\"1519\"]}'),
 (103, 'demo', 'demo@gmail.com', '$2y$12$FeMg.CgYIoYDMJ/bapm3BuoKplOBnnwmrivd0LHmKYbaZmI796cGS', '2022-02-23 20:12:55', 'Asu', 1, 0, 1500, 0, 1, 1, 0, NULL, NULL, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":false,\"level6\":false,\"level7\":false,\"level8\":false,\"level9\":false}', ''),
 (91, 'Chancla', 'etienne.goudot@hotmail.com', '$2y$12$LTLk/az.8USOwutHwnTIh.g.F8Hc69E4zfQb2ieZpfLAgKfbA4smW', '2022-02-21 14:33:10', NULL, 1, 30, 50, 0, 0, 0, 0, NULL, NULL, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":false,\"level6\":false,\"level7\":false,\"level8\":false,\"level9\":false}', ''),
-(104, 'Lado', 'dorianekambi@gmail.com', '$2y$12$77lx5nEPiHLvyEIkXC.4J.F7wP7piqTdRbdntnWALSEKHojweipBS', '2022-02-27 14:33:57', NULL, 6, 20010, 94020, 0, 0, 0, 1, NULL, 0, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":true,\"level6\":true,\"level7\":false,\"level8\":false,\"level9\":true}', '{\"bench3_json\":[\"1083\",\"1299\",\"1084\",\"1268\"],\"bench2_json\":[],\"bench_json\":[]}'),
+(104, 'Lado', 'dorianekambi@gmail.com', '$2y$12$77lx5nEPiHLvyEIkXC.4J.F7wP7piqTdRbdntnWALSEKHojweipBS', '2022-02-27 14:33:57', NULL, 6, 20010, 83020, 1, 0, 0, 1, NULL, 0, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":true,\"level6\":true,\"level7\":false,\"level8\":false,\"level9\":true}', '{\"bench3_json\":[\"1083\",\"1299\",\"1084\",\"1268\"],\"bench2_json\":[],\"bench_json\":[]}'),
 (105, 'BladeTV', 'louiswoufi19@gmail.com', '$2y$12$BacgR8Gz1C9fUpFqSviFeO5GxyCx8VJMrpntNty5eoL6UZu2wi1Ka', '2022-02-27 18:58:09', NULL, 1, 0, 0, 0, 0, 0, 0, NULL, 0, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":false,\"level6\":false,\"level7\":false,\"level8\":false,\"level9\":false}', ''),
 (106, 'pamplemousse', 'nardin.zoe06@gmail.com', '$2y$12$.BXFZ6RNs1p65F.0Cy3ZVuGOrBu0HtfJPR.hSGzKU.6TFKulNjgEC', '2022-02-27 19:35:26', 'Waks Jr', 2, 1120, 380, 0, 0, 0, 0, NULL, 0, '{\"level1\":true,\"level2\":true,\"level3\":false,\"level4\":false,\"level5\":false,\"level6\":false,\"level7\":false,\"level8\":false,\"level9\":false}', ''),
 (107, 'Sunny', 'test@test.com', '$2y$12$l7I/YcL8IFqLBz1r.ix90.ZdYOFKHNBv4X7sU3MsJyy5xfDF8N8La', '2022-02-28 21:07:51', 'Pamplemousse', 1, 0, 1500, 0, 1, 1, 0, NULL, NULL, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":false,\"level6\":false,\"level7\":false,\"level8\":false,\"level9\":false}', ''),
@@ -1901,7 +1926,7 @@ INSERT INTO `user` (`u_id`, `pseudo`, `email`, `password`, `date`, `parrain`, `l
 (122, 'FloTest', 'test@hotmail.fr', 'Test123$', '2022-04-01 16:23:48', NULL, 1, 500, 50000, 0, 0, 0, 0, NULL, NULL, '', NULL),
 (121, 'fayssalhack', 'hq9pbkb2f@1337.cloudns.nz', '$2y$12$5ssISvPIbFGvQoznX1FVt.bRQOnTXpwL8eAKQx7u2aWaCkSo54RUC', '2022-03-29 11:18:56', NULL, 1, 0, 0, 0, 0, 0, 0, NULL, 0, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":false,\"level6\":false,\"level7\":false,\"level8\":false,\"level9\":false}', NULL),
 (115, 'Kiki95tkt', 'mizelezolakylian@gmail.com', '$2y$12$iTBLJLEDoDP35LYFjmD8oefWl0m1EYrqJPJZwj1ffvb9Q3LhAOR8u', '2022-03-14 09:12:47', NULL, 1, 210, 410, 0, 0, 0, 0, NULL, 1, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":false,\"level6\":false,\"level7\":false,\"level8\":false,\"level9\":false}', ''),
-(117, 'kyky', 'k@k', '$2y$12$lZR8RaLboxuoyv3JPXbcKe.jR0gbPIlGQy2QZazzFVd./rxzFWkU.', '2022-03-16 10:41:41', NULL, 5, 10070, 29150, 0, 0, 0, 0, NULL, 1, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":true,\"level6\":false,\"level7\":false,\"level8\":false,\"level9\":false}', '{\"bench3_json\":[\"1117\",\"1126\",\"1112\",\"1116\"],\"bench2_json\":[\"1123\",\"1122\",\"1111\"],\"bench_json\":[\"1127\",\"1119\"]}'),
+(117, 'kyky', 'k@k', '$2y$12$lZR8RaLboxuoyv3JPXbcKe.jR0gbPIlGQy2QZazzFVd./rxzFWkU.', '2022-03-16 10:41:41', NULL, 5, 10070, 19150, 0, 0, 0, 0, NULL, 1, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":true,\"level6\":false,\"level7\":false,\"level8\":false,\"level9\":false}', '{\"bench3_json\":[\"1117\",\"1126\",\"1112\",\"1116\"],\"bench2_json\":[\"1123\",\"1122\",\"1111\"],\"bench_json\":[\"1127\",\"1119\"]}'),
 (120, 'Pyromanprod', 'renaudkieffer6@gmail.com', '$2y$12$F8YxllFvHD41Mjj1HUOHuO.k.pG5dQaSlXE9gz2vnMOovgxtaYV0W', '2022-03-28 17:18:09', NULL, 1, 0, 0, 0, 0, 0, 0, NULL, NULL, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":false,\"level6\":false,\"level7\":false,\"level8\":false,\"level9\":false}', NULL),
 (118, 'Ozmog', 'baptisteprat29@gmail.com', '$2y$12$Ink9B9mhFVhhDFXTOQg2auENMtX8g9g3my/P0e3gOw96YkF6.HlRa', '2022-03-17 21:50:58', 'Waks', 1, 50, 1575, 0, 0, 0, 0, NULL, 0, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":false,\"level6\":false,\"level7\":false,\"level8\":false,\"level9\":false}', NULL),
 (119, 'zakhiel', 'lucrigaud@gmail.com', '$2y$12$aEUeEe1lDdtGp.0MAOqxDegssoeyur2ks/bt6fp4NJ2da.D.wuHn2', '2022-03-21 11:56:58', NULL, 1, 200, 88240, 0, 0, 0, 0, NULL, 3, '{\"level1\":true,\"level2\":false,\"level3\":false,\"level4\":false,\"level5\":false,\"level6\":false,\"level7\":false,\"level8\":false,\"level9\":false}', NULL);
@@ -1914,6 +1939,12 @@ INSERT INTO `user` (`u_id`, `pseudo`, `email`, `password`, `date`, `parrain`, `l
 -- Index pour la table `friends`
 --
 ALTER TABLE `friends`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `infirmary`
+--
+ALTER TABLE `infirmary`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1946,6 +1977,12 @@ ALTER TABLE `friends`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `infirmary`
+--
+ALTER TABLE `infirmary`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `kard`
 --
 ALTER TABLE `kard`
@@ -1955,7 +1992,7 @@ ALTER TABLE `kard`
 -- AUTO_INCREMENT pour la table `ukards`
 --
 ALTER TABLE `ukards`
-  MODIFY `rowID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1535;
+  MODIFY `rowID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1557;
 
 --
 -- AUTO_INCREMENT pour la table `user`

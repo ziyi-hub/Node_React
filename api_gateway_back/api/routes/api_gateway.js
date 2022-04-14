@@ -35,14 +35,33 @@ router.get('/user/:id', auth, async (req, res, next) => { //:id = parametre, rec
     let user;
     let result;
 
-    try {
-        user = await db.select('*').from('user').where('u_id', req.params.id); //par défaut dans where '=', mais tu peux remplacer par '<' ou '>' ...
-        result = {
-            type: "collection",
-            count: user.length,
-            user: user
+
+
+    const accessToken = req.headers["authorization"]; //recup access token dans le header
+    const tokenData = jwt.decode(accessToken); // décode le token
+    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', req.params.id); //prend le pseudo de l'utilisateur de l'id de la requête
+    try { //verif que le token est le meme pour éviter que tout le monde récupère les informations des autres
+        if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
+
+            try {
+                user = await db.select('*').from('user').where('u_id', req.params.id); //par défaut dans where '=', mais tu peux remplacer par '<' ou '>' ...
+                result = {
+                    type: "collection",
+                    count: user.length,
+                    user: user
+                }
+                res.status(200).json(result);
+            }
+            catch (error) {
+                next(error);
+            };
         }
-        res.status(200).json(result);
+        else {
+            res.status(403).json({
+                error: "Access token invalide, vous n'avez pas les droits!"
+            }
+            );
+        }
     }
     catch (error) {
         next(error);
@@ -169,13 +188,23 @@ router.put('/user/:id', auth, async (req, res, next) => {
                     }
                 }
                 if (req.body.email) {
-                    await db
-                        .select('id')
-                        .from('user').where('u_id', '=', req.params.id)
-                        .update({
-                            email: req.body.email,
+                    //permet de check si un mail existe déjà dans la base de données
+                    const bool = await db.select('email').from('user').where('email', req.body.email);
+                    if (bool[0] != null) { //si le mail est trouvé et donc existe alors true sinon false
+                        res.status(403).json({
+                            error: "Cette email existe déjà!"
                         });
-                    res.status(204).json('success');
+                    }
+                    else {
+
+                        await db
+                            .select('id')
+                            .from('user').where('u_id', '=', req.params.id)
+                            .update({
+                                email: req.body.email,
+                            });
+                        res.status(204).json('success');
+                    }
                 } if (req.body.password) {
                     await db
                         .select('id')
@@ -211,21 +240,33 @@ router.post('/auth/signup', async (req, res, next) => {
     const auth = req.headers['authorization'];
 
     try {
-        const result = await axios
-            .post('http://authentification:3000/auth/signup', {},
-                {
-                    headers: {
-                        'Authorization': `${auth}`,
-                        'pseudo': req.body.pseudo,
-                        'email': req.body.email,
-                        'password': req.body.password,
-                        'event': req.body.event,
-                        'claw': req.body.claw,
-                        'king': req.body.king,
-                        'exchange': req.body.exchange,
-                        'rewardLevel': req.body.rewardLevel,
-                    },
-                });
+
+        if (req.body.parrain) {
+            const result = await axios
+                .post('http://authentification:3000/auth/signup', {},
+                    {
+                        headers: {
+                            'Authorization': `${auth}`,
+                            'pseudo': req.body.pseudo,
+                            'email': req.body.email,
+                            'password': req.body.password,
+                            'parrain': req.body.parrain
+                        },
+                    });
+        }
+        else {
+            const result = await axios
+                .post('http://authentification:3000/auth/signup', {},
+                    {
+                        headers: {
+                            'Authorization': `${auth}`,
+                            'pseudo': req.body.pseudo,
+                            'email': req.body.email,
+                            'password': req.body.password,
+                        },
+                    });
+        }
+
 
         res.json(result.data);
     }
