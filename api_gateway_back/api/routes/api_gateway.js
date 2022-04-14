@@ -226,26 +226,129 @@ router.put('/user/:id/level', auth, async (req, res, next) => { //:id = parametr
 });
 
 
-//incrémenter un pack king
-//incrémenter de 1 et retirer le nbr de credit, verif qu'il a le nombre de crédit
-router.patch('/king/:pseudo', auth, async (req, res, next) => {
-    let parrainUser;
-    let kingParrain;
+//Achat d'un pack king
+//incrémenter de 1 et retirer le nbr de credit, verif qu'il a le nombre de crédit + le bon jwt
+router.put('/user/:id/king', auth, async (req, res, next) => {
+    let kingUser;
+    let user;
+    let nbrKoinsUser = await db.select("koins").from("user").where("u_id", req.params.id); //recup le nbr de koins de l'user
+    let priceKingPack = 5000; //prix du pack
 
-    try {
-        kingParrain = await db.select("king").from("user").where("pseudo", req.params.pseudo);
-        parrainUser = await db("user").where("pseudo", req.params.pseudo).update({
-            king: kingParrain[0].king + 1
-        });
-        res.json(kingParrain);
+    const accessToken = req.headers["authorization"]; //recup access token dans le header
+    const tokenData = jwt.decode(accessToken); // décode le token
+    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', req.params.id); //prend le pseudo de l'utilisateur de l'id de la requête
+    //verif que le token est le meme
+    if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
+        if (nbrKoinsUser[0].koins >= priceKingPack) {
+            try {
+                kingUser = await db.select("king").from("user").where("u_id", req.params.id); //nbr de king de l'user
+                user = await db("user").where("u_id", req.params.id).update({
+                    king: kingUser[0].king + 1, //incrémente de 1 quand il achete le pack
+                    koins: nbrKoinsUser[0].koins - priceKingPack
+                });
+            }
+            catch (error) {
+                next(error);
+            };
+            res.status(204).json("Pack successfully buyed");
+        }
+        else {
+            res.status(403).json({
+                error: "Koins insuffisants!"
+            })
+        }
     }
-    catch (error) {
-        next(error);
-    };
+    else {
+        res.status(403).json({
+            error: "Access token invalide, vous n'avez pas les droits!"
+        });
+    }
+
+});
+
+
+//Achat d'un pack event
+//incrémenter de 1 et retirer le nbr de credit, verif qu'il a le nombre de crédit + le bon jwt
+router.put('/user/:id/event', auth, async (req, res, next) => {
+    let eventUser;
+    let user;
+    let nbrKoinsUser = await db.select("koins").from("user").where("u_id", req.params.id); //recup le nbr de koins de l'user
+    let priceEventPack = 3000; //prix du pack
+
+    const accessToken = req.headers["authorization"]; //recup access token dans le header
+    const tokenData = jwt.decode(accessToken); // décode le token
+    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', req.params.id); //prend le pseudo de l'utilisateur de l'id de la requête
+    //verif que le token est le meme
+    if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
+        if (nbrKoinsUser[0].koins >= priceEventPack) {
+            try {
+                eventUser = await db.select("event").from("user").where("u_id", req.params.id); //nbr de event de l'user
+                user = await db("user").where("u_id", req.params.id).update({
+                    event: eventUser[0].event + 1, //incrémente de 1 quand il achete le pack
+                    koins: nbrKoinsUser[0].koins - priceEventPack
+                });
+            }
+            catch (error) {
+                next(error);
+            };
+            res.status(204).json("Pack successfully buyed");
+        }
+        else {
+            res.status(403).json({
+                error: "Koins insuffisants!"
+            })
+        }
+    }
+    else {
+        res.status(403).json({
+            error: "Access token invalide, vous n'avez pas les droits!"
+        });
+    }
+
 });
 
 
 
+
+//Achat d'un pack claw
+//incrémenter de 1 et retirer le nbr de credit, verif qu'il a le nombre de crédit + le bon jwt
+router.put('/user/:id/claw', auth, async (req, res, next) => {
+    let clawUser;
+    let user;
+    let nbrKoinsUser = await db.select("koins").from("user").where("u_id", req.params.id); //recup le nbr de koins de l'user
+    let priceClawPack = 2000; //prix du pack
+
+    const accessToken = req.headers["authorization"]; //recup access token dans le header
+    const tokenData = jwt.decode(accessToken); // décode le token
+    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', req.params.id); //prend le pseudo de l'utilisateur de l'id de la requête
+    //verif que le token est le meme
+    if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
+        if (nbrKoinsUser[0].koins >= priceClawPack) {
+            try {
+                clawUser = await db.select("claw").from("user").where("u_id", req.params.id); //nbr de claw de l'user
+                user = await db("user").where("u_id", req.params.id).update({
+                    claw: clawUser[0].claw + 1, //incrémente de 1 quand il achete le pack
+                    koins: nbrKoinsUser[0].koins - priceClawPack
+                });
+            }
+            catch (error) {
+                next(error);
+            };
+            res.status(204).json("Pack successfully buyed");
+        }
+        else {
+            res.status(403).json({
+                error: "Koins insuffisants!"
+            })
+        }
+    }
+    else {
+        res.status(403).json({
+            error: "Access token invalide, vous n'avez pas les droits!"
+        });
+    }
+
+});
 
 
 
