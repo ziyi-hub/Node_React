@@ -228,6 +228,79 @@ router.put('/user/:id/level', auth, async (req, res, next) => { //:id = parametr
 });
 
 
+
+// incrémenter un logoutWin
+router.put('/user/:id/logoutWin', auth, async (req, res, next) => { //:id = parametre, recupérable par req.params
+
+    const accessToken = req.headers["authorization"]; //recup access token dans le header
+    const tokenData = jwt.decode(accessToken); // décode le token
+    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', req.params.id); //prend le pseudo de l'utilisateur de l'id de la requête
+    try { //verif que le token est le meme pour éviter que tout le monde récupère les informations des autres
+        if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
+
+            try {
+                let userLogoutWin = await db.select('logoutWin').from('user').where('u_id', '=', req.params.id);
+                await db
+                    .select('logoutWin')
+                    .from('user').where('u_id', '=', req.params.id)
+                    .update({
+                        logoutWin: userLogoutWin[0].logoutWin + 1,
+                    });
+                res.status(204).json('success');
+            }
+            catch (error) {
+                next(error);
+            };
+        }
+        else {
+            res.status(403).json({
+                    error: "Access token invalide, vous n'avez pas les droits!"
+                }
+            );
+        }
+    }
+    catch (error) {
+        next(error);
+    };
+});
+
+
+// incrémenter un winsVsIA
+router.put('/user/:id/winsVsIA', auth, async (req, res, next) => { //:id = parametre, recupérable par req.params
+
+    const accessToken = req.headers["authorization"]; //recup access token dans le header
+    const tokenData = jwt.decode(accessToken); // décode le token
+    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', req.params.id); //prend le pseudo de l'utilisateur de l'id de la requête
+    try { //verif que le token est le meme pour éviter que tout le monde récupère les informations des autres
+        if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
+
+            try {
+                let userWinsVsIA = await db.select('winsVsIA').from('user').where('u_id', '=', req.params.id);
+                await db
+                    .select('winsVsIA')
+                    .from('user').where('u_id', '=', req.params.id)
+                    .update({
+                        winsVsIA: userWinsVsIA[0].winsVsIA + 1,
+                    });
+                res.status(204).json('success');
+            }
+            catch (error) {
+                next(error);
+            };
+        }
+        else {
+            res.status(403).json({
+                    error: "Access token invalide, vous n'avez pas les droits!"
+                }
+            );
+        }
+    }
+    catch (error) {
+        next(error);
+    };
+});
+
+
 //Achat d'un pack king
 //incrémenter de 1 et retirer le nbr de credit, verif qu'il a le nombre de crédit + le bon jwt
 router.put('/user/:id/king', auth, async (req, res, next) => {
