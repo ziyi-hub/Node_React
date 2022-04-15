@@ -1,0 +1,102 @@
+.container-section-stats{
+    display: flex;
+    justify-content: center;
+}
+
+.container-border-stats{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    width: 70%;
+    height: 70%;
+    background: #301417;
+    opacity: 0.8;
+    border: 5px solid #fee580;
+    border-radius: 3em;
+    flex-wrap: wrap;
+}
+
+.title-stats{
+    font-size: 6vw;
+    font-family: "Headshot";
+    color: #fee580;
+    border-bottom: 3px solid #fee580;
+    
+}
+
+.color-title-stats, .value-battle-stats{
+    color: white;
+}
+
+.container-battle-wins-stats{
+    width: 90%;
+    
+}
+
+.battle-wins-stats{
+    color: #fee580;
+    font-size: 3.5vw;
+    font-family: "Gotham-bold";
+    margin: 10%;
+}
+
+.info-battle-wins-stats{
+    color: white;
+    font-family: "Gotham-bold";
+    font-size: 2.5vw;
+    padding: 10%;
+}
+.container-title-stats{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.container-position-settings-stats{
+    width: 100%;   
+}
+
+@media screen and (min-width: 1001px) {
+
+    
+    .container-border-stats{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 90%;
+        margin-bottom: 11vh;
+    }
+
+    .container-battle-wins-stats{
+        max-width: 40%;
+    }
+
+    .color-title-stats, .title-stats{
+        font-size: 2.9vw;
+        
+    }
+
+    .battle-wins-stats{
+        font-size: 1.5vw;
+    }
+
+    .info-battle-wins-stats{
+        font-size: 0.9vw;
+    }
+
+
+    .container-position-settings-stats{
+        width: 77.78%;
+        margin-left: 0.78%;
+    }
+
+   .container-settings-stats{
+       width: 37.2%;
+       text-align: start;
+   }
+   .ml-stats{
+    margin-left: 5%;
+}
+}

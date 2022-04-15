@@ -1,0 +1,158 @@
+.section-pack-shop{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-shop-pack{
+    font-family: "Headshot";
+    color: #fee580;
+    font-size: 15vw;
+    text-align: center;
+    margin-top: 3%;
+}
+
+.container-packs-shop{
+    width: 80%;
+    background-color: #301417;
+    margin-top: 10%;
+    border: 1px solid #fee580;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.container-images-shop{
+    text-align: center;
+    margin: 20px 0;
+}
+
+.button-shop{
+    width: 50%;
+    margin-top: 20px;
+    margin-left: 25%;
+    margin-bottom: 20px;
+    font-size: 6vw;
+    color: black;
+    background-color: #fee580;
+    border: 2px solid transparent;
+}
+
+.button-shop:hover{
+   border: 2px solid black;
+}
+
+.infos-content-shop{
+    font-family: "Gotham-bold";
+    color: white;
+    font-size: 3.5vw;
+}
+
+.color-gold-info-shop{
+    color: #fee580;
+}
+
+.color-green-info-shop{
+    color: #0edd8e;
+}
+
+@media screen and (min-width:500px) {
+    .container-packs-shop{
+        width: 60%;
+    }
+}
+
+@media screen and (min-width:700px) {
+    .container-packs-shop{
+        width: 50%;
+    }
+
+    .button-shop{
+        font-size: 4vw;
+    }
+    .title-shop-pack{
+        font-size: 10vw;
+    }
+}
+
+@media screen and (min-width:1001px) {
+    .section-pack-shop{
+        max-width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .container-packs-shop{
+        width: 25%;
+        margin: 3% 0;
+    }
+
+    .infos-content-shop{
+        font-family: "Gotham-bold";
+        color: white;
+        font-size: 1.2vw;
+    }
+
+    .button-shop{
+        font-size: 2vw;
+    }
+
+    .title-shop-pack{
+        font-size: 7vw;
+    }
+}
+
+@media screen and (min-width:1500px) {
+    .section-pack-shop{
+        max-width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .container-packs-shop{
+        width: 20%;
+        margin: 2% 0;
+    }
+
+    .infos-content-shop{
+        font-family: "Gotham-bold";
+        color: white;
+        font-size: 1vw;
+    }
+
+    .button-shop{
+        font-size: 1.5vw;
+    }
+    .title-shop-pack{
+        margin-top: 1%;
+        font-size: 4vw;
+    }
+}
+
+@media screen and (min-width:1700px) {
+    .section-pack-shop{
+        max-width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .container-packs-shop{
+        width: 17%;
+        margin: 3% 0;
+    }
+
+    .infos-content-shop{
+        font-family: "Gotham-bold";
+        color: white;
+        font-size: 0.8vw;
+    }
+
+    .button-shop{
+        font-size: 1.2vw;
+    }
+}

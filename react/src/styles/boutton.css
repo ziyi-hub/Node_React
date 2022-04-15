@@ -1,0 +1,38 @@
+@font-face {
+    font-family: "GothamBold";
+    src: url(../assets/fonts/GothamBold.ttf);
+}
+
+.button-default {
+    border: solid 3px #fee580;
+    color: #fee580;
+    background-color: transparent;
+    border-radius: 500px;   
+    cursor: pointer;
+    margin: 0;
+    font-family: "GothamBold";
+    text-transform: uppercase;
+}
+
+.navLink-Button{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+}
+
+.text-button-component{
+    white-space: nowrap;
+    padding: 10px;
+    letter-spacing: 1px;
+    
+    font-size: 1.2vw;
+}
+
+@media screen and (min-width:1001px) {
+    .button-default{
+        font-size: 1vw;
+    }
+}

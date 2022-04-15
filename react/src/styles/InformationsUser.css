@@ -1,0 +1,133 @@
+.Container-my-informations{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.container-section-informations-user{
+    display: flex;
+    justify-content: center;
+    background: transparent;
+    padding-bottom: 11vh;
+}
+
+.container-border-informations-user{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    width: 70%;
+    height: 70%;
+    background: #301417;
+    opacity: 0.8;
+    border: 5px solid #fee580;
+    border-radius: 3em;
+    flex-wrap: wrap;
+
+}
+
+.title-informations-user{
+    font-size: 8vw;
+    font-family: "Headshot";
+    margin-top: 5%;
+    color: #fee580;
+    border-bottom: #fee580 solid 2px;
+    text-align: center;
+    
+}
+
+.mb-title{
+    padding-bottom: 7%;
+    
+}
+
+
+
+.container-informations-user{
+    font-family: "Gotham-bold";
+    font-size: 3.5vw;
+    margin-top: 7%;
+    min-width: 5%;
+}
+
+.color-text-informations-user{
+    color: #fee580;
+    padding-bottom: 5%;
+}
+
+.color-informations-user{
+    color: white;
+}
+
+.container-informations-delete-account{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    
+    padding-top: 5%;
+}
+
+.informations-delete-account{
+    color: #fee580;
+    font-size: 3.2vw;
+    border-bottom: #fee580 solid 2px;
+    
+    font-family: "Gotham-bold";
+}
+
+.container-position-settings-informations{
+    width: 100%;
+}
+
+.pb-delete-account{
+    padding-bottom: 5%;
+}
+
+
+
+@media screen and (min-width: 1001px) {
+    
+    .container-border-informations-user{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 90%;
+        margin-bottom: 11vh;
+    }
+
+    .title-informations-user{
+        font-size: 2.9vw;
+        margin-top: 0;
+        
+    }
+
+    .informations-delete-account{
+        font-size: 1vw;
+        margin-top: 50px;
+    }
+
+    .container-informations-user{
+        display: flex;
+        flex-direction: column;
+        font-family: "Gotham-bold";
+        font-size: 1.5vw;
+        margin-top: 0;
+
+    }
+
+    .container-position-settings-informations{
+        width: 77.78%;
+        margin-left: 0.78%;
+    }
+
+   .container-settings-informations{
+       width: 37.2%;
+       text-align: start;
+   }
+
+   .ml-informations{
+       margin-left: 0.6%;
+   }
+}

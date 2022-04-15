@@ -1,0 +1,132 @@
+@font-face {
+    font-family: "Headshot";
+    src: url(../assets/fonts/Headshot.otf);
+}
+
+@font-face {
+    font-family: "Gotham-bold";
+    src: url(../assets/fonts/Gotham-Bold.otf);
+}
+
+.position-title{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.welcome{
+    font-size: 2em;
+    margin-top: 20px;
+    font-family: "Headshot";
+    color: white;
+    
+}
+
+.position-buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-direction: column;
+    margin-top: 20px;
+    height: 130px;
+}
+
+.position{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+    width: 100%;
+    align-items: center;
+    font-size: 1.3em;
+
+}
+
+.position-text{
+font-size: 1em;
+width: 40%;
+text-align: center;
+margin-top: 20px;
+font-family: "Gotham-bold";
+color: white;
+}
+
+.button-inscription{
+    width: 400px;
+}
+
+.button-connexion{
+    width: 400px;
+}
+
+.title{
+    
+    color: #fee580;
+    display: inline;
+}
+
+@media screen and (max-width: 1670px) {
+    .welcome {
+        font-size: 2em;
+    }
+    .position-text{
+        font-size: 1em;
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 1141px) {
+    .welcome {
+        font-size: 1.5em;
+    }
+    .position-text{
+        font-size: 0.8em;
+        width: 60%;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+    .welcome {
+        font-size: 2em;
+    }
+    .position-text{
+        font-size: 0.7em;
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .welcome {
+        font-size: 1.5em;
+    }
+
+    .position-text{
+        font-size: 0.7em;
+        width: 70%;
+    }
+}
+
+@media screen and (max-width:500px){
+
+    .welcome {
+        font-size: 1.3em;
+    }
+
+    .position-text{
+        font-size: 0.5em;
+        width: 70%;
+        line-height: 1.5em;
+    }
+}
+
+@media screen and (max-width:350px){
+    .welcome {
+        font-size: 1.2em;
+    }
+    .position-text{
+        font-size: 0.6em;
+        width: 70%;
+    }
+
+}

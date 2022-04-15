@@ -1,0 +1,42 @@
+.settings-profil{
+    border: 1px solid #fee580;
+    width: 100%;
+    bottom: 0;
+    border-radius: 0 0 1.8em 1.8em;
+    text-align: center;
+    font-size: 1.5em;
+    opacity: 1;
+
+
+}
+
+
+.list-settings{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    line-height: 50px;
+    color: #fee580;
+    font-family: "Gotham-Bold";
+    
+    text-align-last: center;
+}
+
+.border-bottom{
+border-bottom: rgba(254, 229, 128, 0.3) solid 1px;
+}
+
+@media screen and (min-width: 1001px ) {
+    .settings-profil{
+        position: relative;
+        border-radius: 0;
+        margin-top: 20px;
+        margin-bottom: 7%;
+    }
+
+    .list-settings{
+        line-height: 40px;
+    }
+}

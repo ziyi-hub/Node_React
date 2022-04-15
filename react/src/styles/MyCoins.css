@@ -1,0 +1,96 @@
+@font-face {
+    font-family: "Headshot";
+    src: url(../assets/fonts/Headshot.otf);
+}
+
+@font-face {
+    font-family: "Gotham-bold";
+    src: url(../assets/fonts/Gotham-Bold.otf);
+}
+
+.coins-desktop{
+    display: none;
+}
+
+.container-section-my-coins{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 20px;
+    min-height: 120px;
+}
+
+
+.coins-value{
+    font-family: "Gotham-Bold";
+    font-size: 3.5vw;
+    color: #fee580;
+}
+
+.text-coins{
+    font-size: 3vw;
+    color: #fee580;
+    font-family: "Headshot";
+}
+
+.container-text-img-coins{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.pack-shop-component-coins{
+    font-size: 1.8vw;
+
+}
+
+
+@media screen and (min-width: 700px ) {
+    .coins-desktop{
+        display: block
+        ;
+        width: 70%;
+    }
+
+    .coins-mobile{
+        display: none;
+    }
+
+    .container-img-coins{
+        display: flex;
+        justify-content: end;
+        align-items: flex-end;
+        
+    }
+    
+    .text-coins{
+        font-size: 2vw;
+    }
+    
+}
+
+@media screen and (min-width: 1001px ) {
+    .container-section-my-coins{
+        width: 100%;
+    }
+    .text-coins{
+        font-size: 2.5vw;
+        margin-top: 40%;
+        
+
+    }
+    .coins-value{
+        font-size: 2.5vw;
+        margin-bottom: 20px;
+    }
+    
+    .container-text-img-coins{
+        margin-bottom: 5%;
+    }
+
+    .pack-shop-component-coins{
+        margin-bottom: 2%;
+    }
+}

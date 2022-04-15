@@ -1,0 +1,14 @@
+ul{
+    list-style: none;
+    text-decoration: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+.background-image{
+    background-image: url(../assets/img/polugon.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}

@@ -1,0 +1,67 @@
+
+
+.container-picture-name-user{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding-bottom: 8%;
+
+}
+
+.picture-user{
+    width: 30vw;
+    height: 30vw;
+    border: solid #fee580 3px;
+    border-radius: 500px;
+    background: transparent;
+}
+
+.user-name{
+    margin-top: 10px;
+    font-size: 8vw;
+    color: #fee580;
+    font-family: "Headshot";
+}
+
+
+
+
+.default-user-picture{
+    width: 100%;
+    height: 100%;
+    border-radius: 500px;
+}
+.button-change-picture-user{
+    margin-top: 30px;
+}
+
+
+@media screen and (max-width: 1000px ) {
+    .button-change-picture-user{
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (min-width: 1001px ) {
+    
+
+    .button-change-picture-user{
+        margin-top: 30px;
+        margin-bottom: 30px;
+        font-size: 1vw;
+    }
+
+    .picture-user{
+        width: 15vw;
+        height: 15vw;
+    }
+
+    .user-name{
+        font-size: 4vw;
+    }
+}
