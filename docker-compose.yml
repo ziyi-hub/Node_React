@@ -16,7 +16,6 @@ services:
     networks:
       - lbs
 
-
   api_gateway_back:
     container_name: api_gateway_back
     image: node:lts

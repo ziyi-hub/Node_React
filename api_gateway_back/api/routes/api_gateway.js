@@ -39,9 +39,8 @@ router.get('/user/:id', auth, async (req, res, next) => { //:id = parametre, rec
 
     const accessToken = req.headers["authorization"]; //recup access token dans le header
     const tokenData = jwt.decode(accessToken); // décode le token
-    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', req.params.id); //prend le pseudo de l'utilisateur de l'id de la requête
     try { //verif que le token est le meme pour éviter que tout le monde récupère les informations des autres
-        if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
+        if (tokenData.idUser == req.params.id) { //si l'id du token correspond a celui de la requête (pour etre sur que c'est bien la personne qui fait la requete)
 
             try {
                 user = await db.select('*').from('user').where('u_id', req.params.id); //par défaut dans where '=', mais tu peux remplacer par '<' ou '>' ...
@@ -112,9 +111,8 @@ router.put('/user/:id/xp', auth, async (req, res, next) => { //:id = parametre, 
 
     const accessToken = req.headers["authorization"]; //recup access token dans le header
     const tokenData = jwt.decode(accessToken); // décode le token
-    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', req.params.id); //prend le pseudo de l'utilisateur de l'id de la requête
     try { //verif que le token est le meme pour éviter que tout le monde récupère les informations des autres
-        if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
+        if (tokenData.idUser == req.params.id) { //si l'id du token correspond a celui de la requête (pour etre sur que c'est bien la personne qui fait la requete)
 
             try {
                 if (req.body.xp > 0) {
@@ -155,9 +153,8 @@ router.put('/user/:id/koins', auth, async (req, res, next) => { //:id = parametr
 
     const accessToken = req.headers["authorization"]; //recup access token dans le header
     const tokenData = jwt.decode(accessToken); // décode le token
-    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', req.params.id); //prend le pseudo de l'utilisateur de l'id de la requête
     try { //verif que le token est le meme pour éviter que tout le monde récupère les informations des autres
-        if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
+        if (tokenData.idUser == req.params.id) { //si l'id du token correspond a celui de la requête (pour etre sur que c'est bien la personne qui fait la requete)
 
             try {
                 if (req.body.koins > 0) {
@@ -197,9 +194,8 @@ router.put('/user/:id/level', auth, async (req, res, next) => { //:id = parametr
 
     const accessToken = req.headers["authorization"]; //recup access token dans le header
     const tokenData = jwt.decode(accessToken); // décode le token
-    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', req.params.id); //prend le pseudo de l'utilisateur de l'id de la requête
     try { //verif que le token est le meme pour éviter que tout le monde récupère les informations des autres
-        if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
+        if (tokenData.idUser == req.params.id) { //si l'id du token correspond a celui de la requête (pour etre sur que c'est bien la personne qui fait la requete)
 
             try {
                 let userLevel = await db.select('level').from('user').where('u_id', '=', req.params.id);
@@ -234,10 +230,8 @@ router.put('/user/:id/logoutWin', auth, async (req, res, next) => { //:id = para
 
     const accessToken = req.headers["authorization"]; //recup access token dans le header
     const tokenData = jwt.decode(accessToken); // décode le token
-    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', req.params.id); //prend le pseudo de l'utilisateur de l'id de la requête
     try { //verif que le token est le meme pour éviter que tout le monde récupère les informations des autres
-        if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
-
+        if (tokenData.idUser == req.params.id) { //si l'id du token correspond a celui de la requête (pour etre sur que c'est bien la personne qui fait la requete)
             try {
                 let userLogoutWin = await db.select('logoutWin').from('user').where('u_id', '=', req.params.id);
                 await db
@@ -254,8 +248,8 @@ router.put('/user/:id/logoutWin', auth, async (req, res, next) => { //:id = para
         }
         else {
             res.status(403).json({
-                    error: "Access token invalide, vous n'avez pas les droits!"
-                }
+                error: "Access token invalide, vous n'avez pas les droits!"
+            }
             );
         }
     }
@@ -270,9 +264,8 @@ router.put('/user/:id/winsVsIA', auth, async (req, res, next) => { //:id = param
 
     const accessToken = req.headers["authorization"]; //recup access token dans le header
     const tokenData = jwt.decode(accessToken); // décode le token
-    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', req.params.id); //prend le pseudo de l'utilisateur de l'id de la requête
     try { //verif que le token est le meme pour éviter que tout le monde récupère les informations des autres
-        if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
+        if (tokenData.idUser == req.params.id) { //si l'id du token correspond a celui de la requête (pour etre sur que c'est bien la personne qui fait la requete)
 
             try {
                 let userWinsVsIA = await db.select('winsVsIA').from('user').where('u_id', '=', req.params.id);
@@ -290,8 +283,8 @@ router.put('/user/:id/winsVsIA', auth, async (req, res, next) => { //:id = param
         }
         else {
             res.status(403).json({
-                    error: "Access token invalide, vous n'avez pas les droits!"
-                }
+                error: "Access token invalide, vous n'avez pas les droits!"
+            }
             );
         }
     }
@@ -311,9 +304,7 @@ router.put('/user/:id/king', auth, async (req, res, next) => {
 
     const accessToken = req.headers["authorization"]; //recup access token dans le header
     const tokenData = jwt.decode(accessToken); // décode le token
-    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', req.params.id); //prend le pseudo de l'utilisateur de l'id de la requête
-    //verif que le token est le meme
-    if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
+    if (tokenData.idUser == req.params.id) { //si l'id du token correspond a celui de la requête (pour etre sur que c'est bien la personne qui fait la requete)
         if (nbrKoinsUser[0].koins >= priceKingPack) {
             try {
                 kingUser = await db.select("king").from("user").where("u_id", req.params.id); //nbr de king de l'user
@@ -352,9 +343,7 @@ router.put('/user/:id/event', auth, async (req, res, next) => {
 
     const accessToken = req.headers["authorization"]; //recup access token dans le header
     const tokenData = jwt.decode(accessToken); // décode le token
-    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', req.params.id); //prend le pseudo de l'utilisateur de l'id de la requête
-    //verif que le token est le meme
-    if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
+    if (tokenData.idUser == req.params.id) { //si l'id du token correspond a celui de la requête (pour etre sur que c'est bien la personne qui fait la requete)
         if (nbrKoinsUser[0].koins >= priceEventPack) {
             try {
                 eventUser = await db.select("event").from("user").where("u_id", req.params.id); //nbr de event de l'user
@@ -395,9 +384,7 @@ router.put('/user/:id/claw', auth, async (req, res, next) => {
 
     const accessToken = req.headers["authorization"]; //recup access token dans le header
     const tokenData = jwt.decode(accessToken); // décode le token
-    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', req.params.id); //prend le pseudo de l'utilisateur de l'id de la requête
-    //verif que le token est le meme
-    if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
+    if (tokenData.idUser == req.params.id) { //si l'id du token correspond a celui de la requête (pour etre sur que c'est bien la personne qui fait la requete)
         if (nbrKoinsUser[0].koins >= priceClawPack) {
             try {
                 clawUser = await db.select("claw").from("user").where("u_id", req.params.id); //nbr de claw de l'user
@@ -482,9 +469,8 @@ router.put('/user/:id', auth, async (req, res, next) => {
 
     const accessToken = req.headers["authorization"]; //recup access token dans le header
     const tokenData = jwt.decode(accessToken); // décode le token
-    const userPseudoParam = await db.select('pseudo').from('user').where('u_id', req.params.id); //prend le pseudo de l'utilisateur de l'id de la requête
-    try {
-        if (tokenData.pseudo == userPseudoParam[0].pseudo) { //si le pseudo de l'access token correspond au pseudo de l'id de la requête
+    try { //verif que le token est le meme pour éviter que tout le monde récupère les informations des autres
+        if (tokenData.idUser == req.params.id) { //si l'id du token correspond a celui de la requête (pour etre sur que c'est bien la personne qui fait la requete)
             try { //rajouter des if verif si pseudo existe pas deja...
                 if (req.body.pseudo) {
 
@@ -606,6 +592,79 @@ router.post('/auth/signup', async (req, res, next) => {
     }
 });
 
+
+
+//infirmary --------------
+
+//Ajout d'une carte dans l'infirmary d'une user
+
+
+router.post('/user/:id/infirmary/add', async (req, res, next) => {
+
+    const auth = req.headers['authorization'];
+    let result;
+
+    try {
+
+        if (req.body.parrain) { // si il a rentré un parrain
+            const boolParrain = await db.select("*").from("user").where("pseudo", req.body.parrain); //verifie que le parrain existe
+            if (boolParrain[0] != null) { //si il existe:
+                result = await axios
+                    .post('http://authentification:3000/auth/signup', {},
+                        {
+                            headers: {
+                                'Authorization': `${auth}`,
+                                'pseudo': req.body.pseudo,
+                                'email': req.body.email,
+                                'password': req.body.password,
+                                'parrain': req.body.parrain
+                            },
+                        });
+            }
+            else { //parrain existe pas = erreur faut recommencer
+                result = { error: "Ce parrain n'existe pas!" } //envoie une erreur pour authentification.js
+                res.status(401).json({
+                    error: "Ce parrain n'existe pas!"
+                })
+            }
+        }
+        else { //si pas de parrain
+            result = await axios
+                .post('http://authentification:3000/auth/signup', {},
+                    {
+                        headers: {
+                            'Authorization': `${auth}`,
+                            'pseudo': req.body.pseudo,
+                            'email': req.body.email,
+                            'password': req.body.password,
+                        },
+                    });
+        }
+
+        res.json(result.data);
+    }
+    catch (error) { //si erreur lors de l'envois du json
+        res.status(401).json({
+            error: "Bad credentials"
+        })
+        next(error);
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//export router
 module.exports = router;
-
-

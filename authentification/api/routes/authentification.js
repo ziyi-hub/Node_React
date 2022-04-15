@@ -23,7 +23,9 @@ router.post('/signin', async (req, res) => {
 
             bcrypt.compare(password, user.password, async function (err, result) {
                 if (result) {
-                    token = jwt.sign({ pseudo }, 'my_secret_key', { algorithm: 'HS256', expiresIn: '600000s' });
+                    let idUser = await db.select('u_id').from('user').where('pseudo', pseudo);
+                    idUser = idUser[0].u_id;
+                    token = jwt.sign({ pseudo, idUser }, 'my_secret_key', { algorithm: 'HS256', expiresIn: '600000s' });
 
                     return res.status(201).json({
                         token: token
